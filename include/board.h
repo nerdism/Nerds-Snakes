@@ -17,7 +17,7 @@ class Board {
     
     void put_seed(std::vector<BodyPart>& parts);
 
-    private:
+    protected:
     size_t board_width;
     size_t board_height;
     size_t seed_x;

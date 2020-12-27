@@ -63,7 +63,7 @@ class Snake
     inline size_t get_length();
     inline std::vector<BodyPart>& get_body();
 
-    private:
+    protected:
 
     std::vector<BodyPart> snake_parts;
 };
