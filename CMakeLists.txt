@@ -20,6 +20,7 @@ if (CMAKE_HOST_UNIX )
 endif (CMAKE_HOST_UNIX)
 
 
+file(COPY  "graphics" DESTINATION ${PROJECT_BINARY_DIR})
 include_directories("include")
 
 

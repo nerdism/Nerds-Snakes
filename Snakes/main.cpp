@@ -31,7 +31,7 @@ class Snakes: public olc::PixelGameEngine
 	public:
 
 	Snakes():
-		frame_per_second(1.0f / 20.0f),
+		frame_per_second(1.0f / 10.0f),
 		accumulated_time(0.0f)
 	{
 		// Name you application
@@ -44,20 +44,19 @@ class Snakes: public olc::PixelGameEngine
 	{
 		// Called once at the start, so create things here
 
-		Clear(olc::WHITE);
 
 
 		/*
 		main_layer = CreateLayer();
 		EnableLayer(main_layer, true);
-		Clear(olc::WHITE);
 		*/
 
 
-		std::shared_ptr<olc::Sprite> seed_sprite(new olc::Sprite("C:\\Users\\Mr.Smiler\\source\\repos\\Snakes\\graphics\\mango.png"));
+		SetPixelMode(olc::Pixel::ALPHA);
+		std::shared_ptr<olc::Sprite> snake_sprite(new olc::Sprite("../graphics/snake2.png"));
 
-		snake.reset(new SnakeObject(10, 10));
-		board.reset(new BoardObject(ScreenWidth(), ScreenHeight(), seed_sprite));
+		snake.reset(new SnakeObject(30, 30, Directions::RIGHT,snake_sprite, snake_sprite->width/5 - 1, snake_sprite->height/4 - 1));
+		board.reset(new BoardObject(ScreenWidth(), ScreenHeight(), snake_sprite));
 
 		game_objects.push_back(board);
 		game_objects.push_back(snake);
@@ -126,9 +125,15 @@ class Snakes: public olc::PixelGameEngine
 
 int main()
 {
+	const int32_t width = 1800;
+	const int32_t height = 1000;
+	const int32_t pixel_width = 1;
+	const int32_t pixel_height = 1;
+
 	Snakes game;
-	if (game.Construct(200, 200, 5, 5))
+	if (game.Construct(width, height, pixel_width, pixel_height))
 		game.Start();
+
 	return 0;
 }
 
