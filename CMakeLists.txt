@@ -3,26 +3,25 @@
 #
 cmake_minimum_required (VERSION 3.8)
 
-set (CMAKE_CXX_STANDARD 17)
+project ("c")
 
-project ("Snakes")
+if(NOT DEFINED CMAKE_TOOLCHAIN_FILE)
+    message(FATAL_ERROR "Please dertermine CMAKE_TOOLCHAIN_FILE variable "
+                        "either in cmake commandline or environment variable "
+                        "it's value should be the path to vcpkg cmake file")    
+endif()
 
-if (CMAKE_HOST_UNIX )
-    set(THREADS_PREFER_PTHREAD_FLAG ON)
-    find_package(Threads REQUIRED)
-    find_package(PNG REQUIRED)
-    find_package(X11 REQUIRED)
-    find_package(OpenGL REQUIRED)
-    find_package(GLUT REQUIRED)
-    include_directories( ${OPENGL_INCLUDE_DIRS}  ${GLUT_INCLUDE_DIRS} )
-    include_directories(${PNG_INCLUDE_DIR})
-
-endif (CMAKE_HOST_UNIX)
+if(NOT EXISTS ${CMAKE_TOOLCHAIN_FILE})
+    message(FATAL_ERROR "Please provide valid CMAKE_TOOLCHAIN_FILE")    
+endif()
 
 
-file(COPY  "graphics" DESTINATION ${PROJECT_BINARY_DIR})
-include_directories("include")
+set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} /MT")
+set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} /MTd")
+
+# this is for enabling debugging
+set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} /Zi")
 
 
 # Include sub-projects.
-add_subdirectory ("Snakes")
+add_subdirectory ("NerdsSnakes")
