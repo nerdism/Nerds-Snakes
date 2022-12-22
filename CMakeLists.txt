@@ -22,6 +22,7 @@ set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} /MTd")
 # this is for enabling debugging
 set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} /Zi")
 
+include_directories("includes")
 
 # Include sub-projects.
 add_subdirectory ("NerdsSnakes")

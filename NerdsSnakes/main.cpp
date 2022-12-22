@@ -4,6 +4,8 @@
 #include <iostream>
 #include <vector>
 
+#include "game/game.h"
+
 int main()
 {
     const sf::VideoMode desktop = sf::VideoMode::getDesktopMode();
@@ -14,24 +16,12 @@ int main()
     sf::RenderWindow window(sf::VideoMode(screen_width, screen_height),
                             "Hello Window");
 
-    tgui::GuiSFML gui{window};
-
-    tgui::Button::Ptr button = tgui::Button::create("Click me");
-
-    button->setPosition("50%", "50%");
-    button->setOrigin(0.5f, 0.5f);
-    button->setSize("10%", "10%");
-
-    gui.add(button);
-
     while (window.isOpen())
     {
         sf::Event event;
 
         while (window.pollEvent(event))
         {
-            gui.handleEvent(event);
-
             // window close button
             if (event.type == sf::Event::Closed)
             {
@@ -54,7 +44,6 @@ int main()
         }
 
         window.clear();
-        gui.draw();
         window.display();
     }
     return 0;
