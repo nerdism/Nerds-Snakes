@@ -2,7 +2,14 @@
   "name": "nerdssnakes",
   "version-string": "0.1.0",
   "dependencies": [
-    "sfml",
-    "tgui"
-  ]
+    {
+      "name": "sfml",
+      "version>=": "2.5.1#14"
+    },
+    {
+      "name": "tgui",
+      "version>=": "0.9.5"
+    }
+  ],
+  "builtin-baseline": "e9d35a26f8081ab88035a1c8d9af38c27b52d135"
 }
