@@ -26,5 +26,11 @@ endif()
 
 include_directories("includes")
 
+find_package(CMakeRC CONFIG REQUIRED)
+
+cmrc_add_resource_library(foo-resources ALIAS foo::rc NAMESPACE foo "resources/sound.ogg")
+
+
 # Include sub-projects.
 add_subdirectory ("NerdsSnakes")
+

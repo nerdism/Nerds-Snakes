@@ -2,17 +2,14 @@
 # project specific logic here.
 #
 
-find_package(SFML COMPONENTS system window graphics network audio)
-
 set(TGUI_STATIC_LIBRARIES TRUE)
 find_package(TGUI CONFIG REQUIRED)
-
-
+find_package(SFML COMPONENTS system window graphics network audio)
 
 # Add source to this project's executable.
 add_executable (NerdsSnakes WIN32 "main.cpp" "game/Game.cpp" "game/MainMenuState.cpp")
 
-set(LIBS sfml-graphics sfml-audio sfml-system sfml-network sfml-window tgui)
+set(LIBS sfml-graphics sfml-audio sfml-system sfml-network sfml-window tgui foo::rc)
 
 if (CMAKE_HOST_WIN32)
   list(APPEND LIBS sfml-main)
