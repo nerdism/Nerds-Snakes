@@ -1,7 +1,7 @@
 ﻿# CMakeList.txt : Top-level CMake project file, do global configuration
 # and include sub-projects here.
 #
-cmake_minimum_required (VERSION 3.8)
+cmake_minimum_required (VERSION 3.11)
 
 project ("c")
 
@@ -17,6 +17,7 @@ endif()
 
 
 if (CMAKE_HOST_WIN32)
+    # /MTX is for static liking crt libraries
     set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} /MT")
     set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} /MTd")
 
@@ -24,12 +25,8 @@ if (CMAKE_HOST_WIN32)
     set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} /Zi")
 endif()
 
+
 include_directories("includes")
-
-find_package(CMakeRC CONFIG REQUIRED)
-
-cmrc_add_resource_library(foo-resources ALIAS foo::rc NAMESPACE foo "resources/sound.ogg")
-
 
 # Include sub-projects.
 add_subdirectory ("NerdsSnakes")
