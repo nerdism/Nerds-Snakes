@@ -2,17 +2,23 @@
 # project specific logic here.
 #
 
-find_package(SFML COMPONENTS system window graphics network audio)
-
 set(TGUI_STATIC_LIBRARIES TRUE)
 find_package(TGUI CONFIG REQUIRED)
+find_package(SFML COMPONENTS system window graphics network audio)
+find_package(CMakeRC CONFIG REQUIRED)
 
+# recursivly register all game resources in order to compile them in to cpp files
+file(GLOB_RECURSE GAME_RESOURCES CONFIGURE_DEPENDS ${CMAKE_SOURCE_DIR}/resources/*)
 
+cmrc_add_resource_library(game-resources ALIAS game::rc NAMESPACE game_resources WHENCE ${CMAKE_SOURCE_DIR} ${GAME_RESOURCES})
+
+# recursivly add cpp files compile list
+file(GLOB_RECURSE SRC_FILES CONFIGURE_DEPENDS *.cpp)
 
 # Add source to this project's executable.
-add_executable (NerdsSnakes WIN32 "main.cpp" "game/Game.cpp" "game/MainMenuState.cpp")
+add_executable (NerdsSnakes WIN32 ${SRC_FILES})
 
-set(LIBS sfml-graphics sfml-audio sfml-system sfml-network sfml-window tgui)
+set(LIBS sfml-graphics sfml-audio sfml-system sfml-network sfml-window tgui game::rc)
 
 if (CMAKE_HOST_WIN32)
   list(APPEND LIBS sfml-main)

@@ -1,4 +1,5 @@
 #pragma once
+#include <SFML/Audio.hpp>
 #include <TGUI/TGUI.hpp>
 
 #include "game/GameState.h"
